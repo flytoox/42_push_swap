@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:11:33 by obelaizi          #+#    #+#             */
-/*   Updated: 2022/12/18 12:27:22 by obelaizi         ###   ########.fr       */
+/*   Updated: 2022/12/19 20:28:50 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,23 @@ t_stack	*ft_stack_new(int content)
 	node->data = content;
 	node->next = 0;
 	return (node);
+}
+
+int	ft_lstsize(t_stack *lst)
+{
+	t_stack	*i;
+	int		count;
+
+	if (!lst)
+		return (0);
+	count = 0;
+	i = lst;
+	while (i)
+	{
+		count++;
+		i = i->next;
+	}
+	return (count);
 }
 
 void	add_stack_back(t_stack **lst, t_stack *new)
@@ -49,33 +66,44 @@ void	add_stack_front(t_stack **lst, t_stack *new)
 	*lst = new;
 }
 
-void	sa(t_stack **a)
+t_stack	*get_stack_last(t_stack *lst)
+{
+	if (!lst)
+		return (0);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	sa(t_stack *a)
 {
 	t_stack	*node;
 	int		tmp;
 
-	if (!(*a) || !(*a)->next)
+	if (!a || !(a->next))
 		return ;
-	node = (*a);
+	node = a;
 	tmp = node->data;
 	node->data = node->next->data;
 	node->next->data = tmp;
+	printf("sa\n");
 }
 
-void	sb(t_stack **b)
+void	sb(t_stack *b)
 {
 	t_stack	*node;
 	int		tmp;
 
-	if (!(*b) || !(*b)->next)
+	if (!b || !(b->next))
 		return ;
-	node = (*b);
+	node = b;
 	tmp = node->data;
 	node->data = node->next->data;
 	node->next->data = tmp;
+	printf("sb\n");
 }
 
-void	ss(t_stack **a, t_stack **b)
+void	ss(t_stack *a, t_stack *b)
 {
 	sa(a);
 	sb(b);
@@ -91,6 +119,8 @@ void	pa(t_stack **a, t_stack **b)
 	add_stack_front(a, ft_stack_new(tmp->data));
 	*b = (*b)->next;
 	free(tmp);
+	printf("pa\n");
+
 }
 
 void	pb(t_stack **a, t_stack **b)
@@ -103,6 +133,7 @@ void	pb(t_stack **a, t_stack **b)
 	add_stack_front(b, ft_stack_new(tmp->data));
 	*a = (*a)->next;
 	free(tmp);
+	printf("pb\n");
 }
 
 void	ra(t_stack *a)
@@ -118,6 +149,7 @@ void	ra(t_stack *a)
 		node = node->next;
 	}
 	node->data = first;
+	printf("ra\n");
 }
 
 void	rb(t_stack *b)
@@ -133,6 +165,7 @@ void	rb(t_stack *b)
 		node = node->next;
 	}
 	node->data = first;
+	printf("rb\n");
 }
 
 void	rr(t_stack *a, t_stack *b)
@@ -158,6 +191,7 @@ void	rra(t_stack *a)
 		node = node->next;
 	}
 	a->data = previous;
+	printf("rra\n");
 }
 
 void	rrb(t_stack *b)
@@ -177,6 +211,7 @@ void	rrb(t_stack *b)
 		node = node->next;
 	}
 	b->data = previous;
+	printf("rrb\n");
 }
 
 void	rrr(t_stack *a, t_stack *b)

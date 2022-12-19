@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:36:37 by obelaizi          #+#    #+#             */
-/*   Updated: 2022/12/18 15:09:46 by obelaizi         ###   ########.fr       */
+/*   Updated: 2022/12/19 21:37:32 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,50 @@ void	print_lst(t_stack *head)
 	}
 }
 
+void	sort_some_shit(t_stack *head)
+{
+	t_stack	*tmp;
+
+	if (!head || !(head->next))
+		return ;
+	if (head->data > head->next->data)
+		sa(head);
+	tmp = get_stack_last(head);
+	if (tmp->data < head->data)
+		rra(head);
+}
+
 int	main(int argc, char *argv[])
 {
-	int		*tab;
 	t_stack	*top_a;
 	t_stack	*top_b;
 	t_stack	*tmp;
 	int		count;
+	int		num;
 
 	top_a = NULL;
 	top_b = NULL;
-	tab = malloc((argc - 1) * 4);
 	while (--argc)
 		add_stack_back(&top_a, ft_stack_new(ft_atoi(*(++argv))));
-	if (top_a->data > top_a->next->data)
-		sa(&top_a);
-	tmp = top_a;
-	while (tmp->next)
+	while (1)
 	{
-		if (tmp->data > tmp->next->data)
+		count = 0;
+		sort_some_shit(top_a);
+		tmp = top_a;
+		while (tmp->next)
+		{
+			if (tmp->data > tmp->next->data)
+				break ;
+			count++;
+			tmp = tmp->next;
+		}
+		if (count == ft_lstsize(top_a) - 1)
 			break ;
-		count++;
-		tmp = tmp->next;
+		num = count;
+		while (count--)
+			pb(&top_a, &top_b);
+		sort_some_shit(top_a);
+		while (num--)
+			pa(&top_a, &top_b);
 	}
-	while (count--)
-		pb(&top_a, &top_b);
-}	
+}

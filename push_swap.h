@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:18:16 by obelaizi          #+#    #+#             */
-/*   Updated: 2022/12/18 00:39:52 by obelaizi         ###   ########.fr       */
+/*   Updated: 2022/12/19 20:18:29 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,20 @@ typedef struct t_stack
 t_stack	*ft_stack_new(int content);
 void	add_stack_back(t_stack **lst, t_stack *new);
 void	add_stack_front(t_stack **lst, t_stack *new);
+int	ft_lstsize(t_stack *lst);
+t_stack	*get_stack_last(t_stack *lst);
+
+
+void	sa(t_stack *a);
+void	sb(t_stack *b);
+void	ss(t_stack *a, t_stack *b);
+void	pa(t_stack **a, t_stack **b);
+void	pb(t_stack **a, t_stack **b);
+void	ra(t_stack *a);
+void	rb(t_stack *b);
+void	rr(t_stack *a, t_stack *b);
+void	rra(t_stack *a);
+void	rrb(t_stack *b);
+void	rrr(t_stack *a, t_stack *b);
 
 #endif
