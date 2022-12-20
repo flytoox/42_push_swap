@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:18:16 by obelaizi          #+#    #+#             */
-/*   Updated: 2022/12/19 20:18:29 by obelaizi         ###   ########.fr       */
+/*   Updated: 2022/12/20 21:57:01 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	add_stack_back(t_stack **lst, t_stack *new);
 void	add_stack_front(t_stack **lst, t_stack *new);
 int	ft_lstsize(t_stack *lst);
 t_stack	*get_stack_last(t_stack *lst);
+
+void	sort_some_shit_B(t_stack *head);
+void	sort_some_shit_A(t_stack *head);
 
 
 void	sa(t_stack *a);
