@@ -6,19 +6,20 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:11:33 by obelaizi          #+#    #+#             */
-/*   Updated: 2022/12/19 20:28:50 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/01 19:17:03 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_stack_new(int content)
+t_stack	*ft_stack_new(int content, int index)
 {
 	t_stack	*node;
 
 	node = malloc(sizeof(t_stack));
 	if (!node)
 		return (0);
+	node->index = index;
 	node->data = content;
 	node->next = 0;
 	return (node);
@@ -116,7 +117,7 @@ void	pa(t_stack **a, t_stack **b)
 	if (!(*b))
 		return ;
 	tmp = (*b);
-	add_stack_front(a, ft_stack_new(tmp->data));
+	add_stack_front(a, ft_stack_new(tmp->data, tmp->index));
 	*b = (*b)->next;
 	free(tmp);
 	printf("pa\n");
@@ -130,93 +131,94 @@ void	pb(t_stack **a, t_stack **b)
 	if (!(*a))
 		return ;
 	tmp = (*a);
-	add_stack_front(b, ft_stack_new(tmp->data));
+	add_stack_front(b, ft_stack_new(tmp->data, tmp->index));
 	*a = (*a)->next;
 	free(tmp);
 	printf("pb\n");
 }
 
-void	ra(t_stack *a)
+void	ra(t_stack **a)
 {
+	t_stack	*tmp;
 	t_stack	*node;
-	int		first;
 
-	node = a;
-	first = node->data;
-	while (node->next)
-	{
-		node->data = node->next->data;
+	if (*a == NULL || (*a)->next == NULL)
+		return ;
+	tmp = *a;
+	*a = (*a)->next;
+	node = *a;
+	while (node->next != NULL)
 		node = node->next;
-	}
-	node->data = first;
+	node->next = tmp;
+	tmp->next = NULL;
 	printf("ra\n");
 }
 
-void	rb(t_stack *b)
+void	rb(t_stack **b)
 {
+	t_stack	*tmp;
 	t_stack	*node;
-	int		first;
 
-	node = b;
-	first = node->data;
-	while (node->next)
-	{
-		node->data = node->next->data;
+	if (*b == NULL || (*b)->next == NULL)
+		return ;
+	tmp = *b;
+	*b = (*b)->next;
+	node = *b;
+	while (node->next != NULL)
 		node = node->next;
-	}
-	node->data = first;
+	node->next = tmp;
+	tmp->next = NULL;
 	printf("rb\n");
 }
 
-void	rr(t_stack *a, t_stack *b)
+void	rr(t_stack **a, t_stack **b)
 {
 	ra(a);
 	rb(b);
 }
 
-void	rra(t_stack *a)
+void rra(t_stack **a)
 {
 	t_stack	*node;
-	int		previous;
-	int		tmp;	
+	t_stack	*tmp;
 
-	node = a;
-	previous = node->data;
-	node = node->next;
-	while (node)
+	if (*a == NULL || (*a)->next == NULL)
+		return ;
+	node = *a;
+	while (node->next->next != NULL)
 	{
-		tmp = node->data;
-		node->data = previous;
-		previous = tmp;
 		node = node->next;
 	}
-	a->data = previous;
+
+	tmp = node->next;
+
+	node->next = NULL;
+
+	tmp->next = *a;
+	*a = tmp;
 	printf("rra\n");
 }
 
-void	rrb(t_stack *b)
+void	rrb(t_stack **b)
 {
 	t_stack	*node;
-	int		previous;
-	int		tmp;	
+	t_stack	*tmp;
 
-	node = b;
-	previous = node->data;
-	node = node->next;
-	while (node)
-	{
-		tmp = node->data;
-		node->data = previous;
-		previous = tmp;
+	if (*b == NULL || (*b)->next == NULL)
+		return ;
+	node = *b;
+	while (node->next->next != NULL)
 		node = node->next;
-	}
-	b->data = previous;
+	tmp = node->next;
+	node->next = NULL;
+	tmp->next = *b;
+	*b = tmp;
 	printf("rrb\n");
 }
 
 void	rrr(t_stack *a, t_stack *b)
 {
-	rra(a);
-	rrb(b);
+	rra(&a);
+	rrb(&b);
 }
 

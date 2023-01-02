@@ -6,11 +6,166 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:36:37 by obelaizi          #+#    #+#             */
-/*   Updated: 2022/12/20 23:41:16 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/02 01:22:00 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// int get_max(t_stack *head)
+// {
+// 	int	tmp;
+	
+// 	tmp = head->data;
+// 	while (head)
+// 	{
+// 		if (head->data > tmp)
+// 			tmp = head->data;
+// 		head = head->next;
+// 	}
+// 	return (tmp);
+// }
+
+int	check_big(t_stack *head, int data)
+{
+	while (head)
+	{
+		if (head->data > data)
+			return (0);
+		head = head->next;
+	}
+	return (1);
+}
+
+int check_small(t_stack *head, int data)
+{
+	while (head)
+	{
+		if (head->data < data)
+			return (0);
+		head = head->next;
+	}
+	return (1);
+}
+
+int	is_last(t_stack *head, int chunk)
+{
+	while (head)
+	{
+		if (head->index < chunk)
+			return (1);
+		head = head->next;
+	}
+	return (0);
+}
+
+int	scan_last(t_stack *head, int chunk)
+{
+	int	count;
+	
+	count = 0;
+	while(is_last(head, chunk))
+	{
+		head = head->next;
+		count++;
+	}
+	return (count);
+}
+
+int	scan_first(t_stack *head, int chunk)
+{
+	int	count;
+	
+	count = 1;
+	while(head)
+	{
+		if (head->index < chunk)
+			return (count);
+		head = head->next;
+		count++;
+	}
+	return (count);
+}
+
+int	get_pos(t_stack *head, int index)
+{
+	int	count;
+
+	count = 0;
+	while (head)
+	{
+		if (head->index == index)
+			return (count);
+		head = head->next;
+		count++;
+	}
+	return (0);
+}
+
+int	get_min(t_stack *head, int check)
+{
+	int		tmp;
+	t_stack	*nd;
+
+	nd = head;
+	tmp = head->data;
+	while (head && tmp <= check)
+	{
+		tmp = head->data; 
+		head = head->next;
+	}
+	while (head)
+	{
+		if (head->data <= check)
+		{
+			head = head->next;
+			continue ;
+		}
+		if (head->data < tmp)
+			tmp = head->data;
+		head = head->next;
+	}
+	return (tmp);
+}
+
+int	is_sorted(t_stack *head)
+{
+	if (!head)
+		return (0);
+	while (head->next)
+	{
+		if (head->data > head->next->data)
+			return (0);
+		head = head->next;
+	}
+	return (1);
+}
+
+void	set_index(t_stack *head, int size_lst)
+{
+	int		tmp;
+	int		min;
+	t_stack	*tmp_head;
+
+	tmp = 0;
+	min = -2147483648;
+	tmp_head = head;
+	while (tmp < size_lst)
+	{
+		head = tmp_head;
+		min = get_min(tmp_head, min);
+		while (head)
+		{
+			if (head->data == min)
+			{
+				head->index = tmp++;
+				break ;
+			}
+			head = head->next;
+		}
+	}
+
+}
 
 int	ft_atoi(const char *str)
 {
@@ -40,100 +195,92 @@ void	print_lst(t_stack *head)
 {
 	while (head)
 	{
-		printf("%d ", head->data);
+		printf("%d|%d| ", head->data, head->index);
 		head = head->next;
 	}
-}
-
-void	sort_some_shit_A(t_stack *head)
-{
-	t_stack	*tmp;
-
-	if (!head || !(head->next))
-		return ;
-	if (head->data > head->next->data)
-		sa(head);
-	tmp = get_stack_last(head);
-	if (tmp->data < head->data)
-		rra(head);
-}
-
-void	sort_some_shit_B(t_stack *head)
-{
-	t_stack	*tmp;
-	int		count;
-	int		nm;
-
-	count = 0;
-	if (!head || !(head->next))
-		return ;
-	tmp = get_stack_last(head);
-	if (tmp->data > head->data)
-		rb(head);
-	if (head->data < head->next->data)
-		sb(head);
-	tmp = head;
-	while (tmp->next)
-	{
-		if (tmp->data < tmp->next->data)
-			break ;
-		count++;
-		tmp = tmp->next;
-	}
-	nm = count;
-	if (count == ft_lstsize(head) - 1)
-		return ;
-	while (count--)
-		rb(head);
-	sb(head);
-	while (nm--)
-		rrb(head);
-	// tmp = head;
-	// while (tmp->next)
-	// {
-	// 	if (tmp->data < tmp->next->data || tmp->data < head->data)
-	// 		break ;
-	// 	tmp = tmp->next;
-	// }
-	
-	// printf("f\n");
-	// if (tmp->next)
-	// 	sort_some_shit_B(head);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_stack	*top_a;
 	t_stack	*top_b;
-	t_stack	*tmp;
 	int		count;
 	int		total;
+	int		chunk;
+	int		first;
+	int		last;
 
 	top_a = NULL;
 	top_b = NULL;
 	while (--argc)
-		add_stack_back(&top_a, ft_stack_new(ft_atoi(*(++argv))));
-	total = ft_lstsize(top_a) - 1;
-	while (1)
+		add_stack_back(&top_a, ft_stack_new(ft_atoi(*(++argv)), 0));
+	set_index(top_a, ft_lstsize(top_a));
+	total = ft_lstsize(top_a);
+	if (total == 100)
+		chunk = 20;
+	else if (total == 500)
+		chunk = 50;
+	// else if (total <= 5)
+	// 	sort_ez(top_a);
+	count = chunk;
+	// print_lst(top_a);
+	// printf("(%d) (%d)", scan_first(top_a, count), scan_last(top_a, count));
+	while (top_a)
 	{
-		count = 0;
-		sort_some_shit_A(top_a);
-		tmp = top_a;
-		/*while (tmp->next)
-		{
-			if (tmp->data > tmp->next->data)
-				break ;
-			count++;
-			tmp = tmp->next;
-		}*/
-		if (!total)
+		if (!top_a)
 			break ;
+		if (ft_lstsize(top_b) == count)
+			count = count + chunk;
+		while (top_a->index >= count)
+		{
+			first = scan_first(top_a, count) - 1;
+			last = scan_last(top_a, count) - 1;
+			if (ft_lstsize(top_a) - last > first)
+				ra(&top_a);
+			else
+				rra(&top_a);
+		}
+		// if ((check_big(top_b, top_a->data) || check_small(top_b, top_a->data)) && top_b)
+		// {
+		// 	first = get_min(top_b, -2147483648);
+		// 	while (top_b->data != first)
+		// 		rb(&top_b);
+		// }
 		pb(&top_a, &top_b);
-		total--;
-		sort_some_shit_A(top_a);
-		sort_some_shit_B(top_b);
 	}
+	count = total - 1;
+	while (top_b && count != total - (chunk / 2)
+	{
+		if (top_b->index == count)
+		{
+			pa(&top_a, &top_b);
+			count++;
+		}
+		else
+		{
+			if (get_pos(top_a, count) > chunk / 2)
+				rra(&top_a);
+			else
+				ra(&top_a);
+		}
+	}
+	count = total - 1;
 	while (top_b)
-		pa(&top_a, &top_b);
-	//print_lst(top_a);
+	{
+		if (top_b->index == count)
+		{
+			pa(&top_a, &top_b);
+			count--;
+		}
+		else
+		{
+			if (get_pos(top_b, count) > chunk)
+				rrb(&top_b);
+			else
+				rb(&top_b);
+		}
+	}
+
+//  print_lst(top_a);
+
 }
