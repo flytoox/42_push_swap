@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:36:37 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/02 01:22:00 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/03 00:55:21 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,10 +225,19 @@ int	main(int argc, char *argv[])
 	count = chunk;
 	// print_lst(top_a);
 	// printf("(%d) (%d)", scan_first(top_a, count), scan_last(top_a, count));
+	// print_lst(top_a);
 	while (top_a)
 	{
+		// if (ft_lstsize(top_a) <= chunk)
+		// 	break ;
 		if (!top_a)
 			break ;
+		if (ft_lstsize(top_b) == count - chunk / 2)
+		{
+			first = chunk / 2;
+			while (first--)
+				rb(&top_b);
+		}
 		if (ft_lstsize(top_b) == count)
 			count = count + chunk;
 		while (top_a->index >= count)
@@ -249,24 +258,11 @@ int	main(int argc, char *argv[])
 		pb(&top_a, &top_b);
 	}
 	count = total - 1;
-	while (top_b && count != total - (chunk / 2)
-	{
-		if (top_b->index == count)
-		{
-			pa(&top_a, &top_b);
-			count++;
-		}
-		else
-		{
-			if (get_pos(top_a, count) > chunk / 2)
-				rra(&top_a);
-			else
-				ra(&top_a);
-		}
-	}
-	count = total - 1;
 	while (top_b)
 	{
+		if (count == 20)
+			break ;
+		// printf("---%d--\n", ft_lstsize(top_b));
 		if (top_b->index == count)
 		{
 			pa(&top_a, &top_b);
