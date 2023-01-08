@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:36:37 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/08 12:20:40 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/08 12:33:40 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,7 @@ int	main(int argc, char *argv[])
 		else
 		{
 			pb(&top_a, &top_b);
+			
 			rb(&top_b);
 		}
 		}
