@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:36:37 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/03 00:55:21 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/08 12:20:40 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,10 +216,10 @@ int	main(int argc, char *argv[])
 		add_stack_back(&top_a, ft_stack_new(ft_atoi(*(++argv)), 0));
 	set_index(top_a, ft_lstsize(top_a));
 	total = ft_lstsize(top_a);
-	if (total == 100)
-		chunk = 20;
+	if (total <= 200)
+		chunk = total / 5;
 	else if (total == 500)
-		chunk = 50;
+		chunk = total / 12;
 	// else if (total <= 5)
 	// 	sort_ez(top_a);
 	count = chunk;
@@ -232,12 +232,6 @@ int	main(int argc, char *argv[])
 		// 	break ;
 		if (!top_a)
 			break ;
-		if (ft_lstsize(top_b) == count - chunk / 2)
-		{
-			first = chunk / 2;
-			while (first--)
-				rb(&top_b);
-		}
 		if (ft_lstsize(top_b) == count)
 			count = count + chunk;
 		while (top_a->index >= count)
@@ -249,20 +243,23 @@ int	main(int argc, char *argv[])
 			else
 				rra(&top_a);
 		}
-		// if ((check_big(top_b, top_a->data) || check_small(top_b, top_a->data)) && top_b)
-		// {
-		// 	first = get_min(top_b, -2147483648);
-		// 	while (top_b->data != first)
-		// 		rb(&top_b);
-		// }
-		pb(&top_a, &top_b);
+		if (count > chunk)
+		{
+		if (top_a->index < count - (chunk / 2))
+			pb(&top_a, &top_b);
+		else
+		{
+			pb(&top_a, &top_b);
+			rb(&top_b);
+		}
+		}
+		else
+			pb(&top_a, &top_b);
+
 	}
 	count = total - 1;
 	while (top_b)
 	{
-		if (count == 20)
-			break ;
-		// printf("---%d--\n", ft_lstsize(top_b));
 		if (top_b->index == count)
 		{
 			pa(&top_a, &top_b);
