@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 01:11:33 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/01 19:17:03 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:24:38 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,8 +173,28 @@ void	rb(t_stack **b)
 
 void	rr(t_stack **a, t_stack **b)
 {
-	ra(a);
-	rb(b);
+	t_stack	*tmp;
+	t_stack	*node;
+	t_stack	*tmp1;
+	t_stack	*node1;
+
+	if (*b == NULL || (*b)->next == NULL || *a == NULL || (*a)->next == NULL)
+		return ;
+	tmp = *a;
+	*a = (*a)->next;
+	node = *a;
+	tmp1 = *b;
+	*b = (*b)->next;
+	node1 = *b;
+	while (node->next != NULL)
+		node = node->next;
+	while (node1->next != NULL)
+		node1 = node1->next;
+	node->next = tmp;
+	tmp->next = NULL;
+	node1->next = tmp1;
+	tmp1->next = NULL;
+	printf("rr\n");
 }
 
 void rra(t_stack **a)
@@ -216,9 +236,29 @@ void	rrb(t_stack **b)
 	printf("rrb\n");
 }
 
-void	rrr(t_stack *a, t_stack *b)
+void	rrr(t_stack **a, t_stack **b)
 {
-	rra(&a);
-	rrb(&b);
+	t_stack	*node;
+	t_stack	*tmp;
+	t_stack	*node1;
+	t_stack	*tmp1;
+
+	if (*b == NULL || (*b)->next == NULL || *a == NULL || (*a)->next == NULL)
+		return ;
+	node = *b;
+	while (node->next->next != NULL)
+		node = node->next;
+	tmp = node->next;
+	node->next = NULL;
+	tmp->next = *b;
+	*b = tmp;
+	node1 = *a;
+	while (node1->next->next != NULL)
+		node1 = node1->next;
+	tmp1 = node1->next;
+	node1->next = NULL;
+	tmp1->next = *a;
+	*a = tmp1;
+	printf("rrr\n");
 }
 

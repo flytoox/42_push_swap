@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:18:16 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/08 12:13:04 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/08 19:52:09 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	rb(t_stack **b);
 void	rr(t_stack **a, t_stack **b);
 void	rra(t_stack **a);
 void	rrb(t_stack **b);
-void	rrr(t_stack *a, t_stack *b);
+void	rrr(t_stack **a, t_stack **b);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:36:37 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/08 12:33:40 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:59:40 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,17 +219,13 @@ int	main(int argc, char *argv[])
 	if (total <= 200)
 		chunk = total / 5;
 	else if (total == 500)
-		chunk = total / 12;
+		chunk = total / 10;
 	// else if (total <= 5)
 	// 	sort_ez(top_a);
 	count = chunk;
-	// print_lst(top_a);
-	// printf("(%d) (%d)", scan_first(top_a, count), scan_last(top_a, count));
-	// print_lst(top_a);
-	while (top_a)
+	// while (top_a && ft_lstsize(top_a) != chunk )
+	while (top_a )
 	{
-		// if (ft_lstsize(top_a) <= chunk)
-		// 	break ;
 		if (!top_a)
 			break ;
 		if (ft_lstsize(top_b) == count)
@@ -243,20 +239,26 @@ int	main(int argc, char *argv[])
 			else
 				rra(&top_a);
 		}
-		if (count > chunk)
-		{
-		if (top_a->index < count - (chunk / 2))
+		if (top_a->index >= count - (chunk / 2))
 			pb(&top_a, &top_b);
 		else
 		{
 			pb(&top_a, &top_b);
-			
-			rb(&top_b);
+			if (top_a && top_a->index >= count)
+			{
+				first = scan_first(top_a, count) - 1;
+				last = scan_last(top_a, count) - 1;
+				if (ft_lstsize(top_a) - last > first)
+					rr(&top_a, &top_b);
+				else
+				{
+					rra(&top_a);
+					rb(&top_b);
+				}
+			}
+			else
+				rb(&top_b);
 		}
-		}
-		else
-			pb(&top_a, &top_b);
-
 	}
 	count = total - 1;
 	while (top_b)
@@ -268,7 +270,7 @@ int	main(int argc, char *argv[])
 		}
 		else
 		{
-			if (get_pos(top_b, count) > chunk)
+			if (get_pos(top_b, count) > (chunk / 2) - 1)
 				rrb(&top_b);
 			else
 				rb(&top_b);
@@ -276,5 +278,4 @@ int	main(int argc, char *argv[])
 	}
 
 //  print_lst(top_a);
-
 }
