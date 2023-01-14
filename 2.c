@@ -76,38 +76,47 @@ t_stack	*get_stack_last(t_stack *lst)
 	return (lst);
 }
 
-void	sa(t_stack *a)
+void	sa(t_stack **a)
 {
 	t_stack	*node;
-	int		tmp;
 
-	if (!a || !(a->next))
+	if (!(*a) || !((*a)->next))
 		return ;
-	node = a;
-	tmp = node->data;
-	node->data = node->next->data;
-	node->next->data = tmp;
+	node = *a;
+	*a = (*a)->next;
+	node->next = node->next->next;
+	(*a)->next = node;
 	printf("sa\n");
 }
 
-void	sb(t_stack *b)
+void	sb(t_stack **b)
 {
 	t_stack	*node;
-	int		tmp;
 
-	if (!b || !(b->next))
+	if (!(*b) || !((*b)->next))
 		return ;
-	node = b;
-	tmp = node->data;
-	node->data = node->next->data;
-	node->next->data = tmp;
+	node = *b;
+	*b = (*b)->next;
+	node->next = node->next->next;
+	(*b)->next = node;
 	printf("sb\n");
 }
 
-void	ss(t_stack *a, t_stack *b)
+void	ss(t_stack **a, t_stack **b)
 {
-	sa(a);
-	sb(b);
+	t_stack	*node;
+
+	if (!(*a) || !((*a)->next) || !(*b) || !((*b)->next))
+		return ;
+	node = *a;
+	*a = (*a)->next;
+	node->next = node->next->next;
+	(*a)->next = node;
+	node = *b;
+	*b = (*b)->next;
+	node->next = node->next->next;
+	(*b)->next = node;
+	printf("ss\n");
 }
 
 void	pa(t_stack **a, t_stack **b)

@@ -200,6 +200,74 @@ void	print_lst(t_stack *head)
 	}
 }
 
+void	sort_3(t_stack **a, int start_index)
+{
+	if (is_sorted((*a)->next))
+	{
+		if ((*a)->data > (*a)->next->next->data)
+			ra(a);
+		else
+			sa(a);
+	}
+	else if ((*a)->index == start_index + 2 && (*a)->next->index == start_index + 1 && (*a)->next->next->index == start_index)
+	{
+		sa(a);
+		rra(a);
+	}
+	else if ((*a)->index == start_index && (*a)->next->index == start_index + 2 && (*a)->next->next->index == start_index + 1)
+	{
+		sa(a);
+		ra(a);
+	}
+	else
+		rra(a);
+}
+
+void	sort_4(t_stack **a, t_stack **b, int start_index)
+{
+	int	pos;
+
+	while ((*a)->index != start_index)
+	{
+		pos = get_pos(*a, 0);
+		if (pos <= 2)
+			ra(a);
+		else
+			rra(a);
+	}
+	pb(a, b);
+	sort_3(a, start_index + 1);
+	pa(a, b);
+}
+
+void	sort_ez(t_stack **a, t_stack **b)
+{
+	int pos;
+
+	if (is_sorted(*a))
+		return ;
+	if (ft_lstsize(*a) == 2)
+		sa(a);
+	else if (ft_lstsize(*a) == 3)
+		sort_3(a, 0);
+	else if (ft_lstsize(*a) == 4)
+		sort_4(a, b, 0);
+	else
+	{
+		while ((*a)->index != 0)
+		{
+			pos = get_pos(*a, 0);
+			if (pos <= 3)
+				ra(a);
+			else
+				rra(a);
+		}
+		pb(a, b);
+		sort_4(a, b, 1);
+		pa(a, b);
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	*top_a;
@@ -216,14 +284,20 @@ int	main(int argc, char *argv[])
 		add_stack_back(&top_a, ft_stack_new(ft_atoi(*(++argv)), 0));
 	set_index(top_a, ft_lstsize(top_a));
 	total = ft_lstsize(top_a);
-	if (total <= 200)
+	if (total <= 5)
+	{
+		sort_ez(&top_a, &top_b);
+		return (0);
+	}
+	else if (total < 20)
+		chunk = total;
+	else if (total <= 200)
 		chunk = total / 5;
 	else if (total == 500)
 		chunk = total / 10;
-	// else if (total <= 5)
-	// 	sort_ez(top_a);
+	 else
+		chunk = total / 15;
 	count = chunk;
-	// while (top_a && ft_lstsize(top_a) != chunk )
 	while (top_a )
 	{
 		if (!top_a)
