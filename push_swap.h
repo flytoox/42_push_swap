@@ -24,9 +24,14 @@ typedef struct t_stack
 	struct t_stack	*next;
 }		t_stack;
 
+int	main_parse(char *s, t_stack **head);
+int	check_duplicate(t_stack *a);
+
 int	ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
 
+char	**ft_split(char const *s, char c);
+long long int	ft_atoi(const char *str);
 
 t_stack	*ft_stack_new(int content, int index);
 void	add_stack_back(t_stack **lst, t_stack *new);

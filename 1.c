@@ -278,8 +278,16 @@ int	main(int argc, char *argv[])
 
 	top_a = NULL;
 	top_b = NULL;
+	if (argc == 1)
+		return(printf("cmon do something") ,0);
 	while (--argc)
-		add_stack_back(&top_a, ft_stack_new(ft_atoi(*(++argv)), 0));
+	{
+		if (main_parse(*(++argv), &top_a))
+			return (printf("error ;)") ,0);
+	}
+	if (check_duplicate(top_a))
+		return (printf("there is duplicate baby xD"), 0);
+	print_lst(top_a);
 	set_index(top_a, ft_lstsize(top_a));
 	total = ft_lstsize(top_a);
 	if (total <= 5)
@@ -346,6 +354,5 @@ int	main(int argc, char *argv[])
 				rb(&top_b);
 		}
 	}
-
-//  print_lst(top_a);
+ print_lst(top_a);
 }
