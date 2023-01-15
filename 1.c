@@ -105,9 +105,7 @@ int	get_pos(t_stack *head, int index)
 int	get_min(t_stack *head, int check)
 {
 	int		tmp;
-	t_stack	*nd;
 
-	nd = head;
 	tmp = head->data;
 	while (head && tmp <= check)
 	{
@@ -167,10 +165,10 @@ void	set_index(t_stack *head, int size_lst)
 
 }
 
-int	ft_atoi(const char *str)
+long long int	ft_atoi(const char *str)
 {
-	int	sign;
-	int	result;
+	int				sign;
+	long long int	result;
 
 	result = 0;
 	sign = 1;
@@ -187,7 +185,7 @@ int	ft_atoi(const char *str)
 	{
 		result = result * 10 +(*str - 48);
 		str++;
-	}
+	} 
 	return (result * sign);
 }
 
@@ -285,11 +283,8 @@ int	main(int argc, char *argv[])
 	set_index(top_a, ft_lstsize(top_a));
 	total = ft_lstsize(top_a);
 	if (total <= 5)
-	{
-		sort_ez(&top_a, &top_b);
-		return (0);
-	}
-	else if (total < 20)
+		return (sort_ez(&top_a, &top_b), 0);
+	else if (total <= 20)
 		chunk = total;
 	else if (total <= 200)
 		chunk = total / 5;
@@ -298,9 +293,10 @@ int	main(int argc, char *argv[])
 	 else
 		chunk = total / 15;
 	count = chunk;
-	while (top_a )
+	while (top_a)
 	{
-		if (!top_a)
+		
+		if (!top_a || is_sorted(top_a))
 			break ;
 		if (ft_lstsize(top_b) == count)
 			count = count + chunk;

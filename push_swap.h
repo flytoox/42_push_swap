@@ -24,6 +24,10 @@ typedef struct t_stack
 	struct t_stack	*next;
 }		t_stack;
 
+int	ft_isdigit(int c);
+size_t	ft_strlen(const char *s);
+
+
 t_stack	*ft_stack_new(int content, int index);
 void	add_stack_back(t_stack **lst, t_stack *new);
 void	add_stack_front(t_stack **lst, t_stack *new);
