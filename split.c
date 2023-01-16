@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 23:13:12 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/15 23:13:23 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:29:56 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	skip_c(const char *s, char c)
 	return (i);
 }
 
-static void	free_str(char **str, int i)
+void	free_str(char **str, int i)
 {
 	while (i >= 0)
 	{

@@ -26,9 +26,15 @@ typedef struct t_stack
 
 int	main_parse(char *s, t_stack **head);
 int	check_duplicate(t_stack *a);
+int	is_sorted(t_stack *head);
+int	scan_last(t_stack *head, int chunk);
+int	scan_first(t_stack *head, int chunk);
+int	get_pos(t_stack *head, int index);
+int	get_min(t_stack *head, int check);
 
 int	ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
+void	free_str(char **str, int i);
 
 char	**ft_split(char const *s, char c);
 long long int	ft_atoi(const char *str);
@@ -37,10 +43,7 @@ t_stack	*ft_stack_new(int content, int index);
 void	add_stack_back(t_stack **lst, t_stack *new);
 void	add_stack_front(t_stack **lst, t_stack *new);
 int	ft_lstsize(t_stack *lst);
-t_stack	*get_stack_last(t_stack *lst);
-
-void	sort_some_shit_B(t_stack *head);
-void	sort_some_shit_A(t_stack *head);
+void	ft_lstclear(t_stack **lst);
 
 
 void	sa(t_stack **a);

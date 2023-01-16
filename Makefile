@@ -6,7 +6,7 @@
 #    By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/15 19:52:17 by obelaizi          #+#    #+#              #
-#    Updated: 2023/01/15 23:34:11 by obelaizi         ###   ########.fr        #
+#    Updated: 2023/01/16 15:58:43 by obelaizi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ FLAGS = -Wall -Wextra -Werror
 
 all : $(NAME)
 
-SRCS = 1.c 2.c functions_helpers.c parsing.c split.c 
+SRCS = main_file.c mandatory_func1.c mandatory_func2.c lst_functions.c functions_helpers1.c functions_helpers2.c parsing.c split.c 
 OBJS= $(SRCS:.c=.o)
 
 
