@@ -6,12 +6,12 @@
 #    By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/15 19:52:17 by obelaizi          #+#    #+#              #
-#    Updated: 2023/01/16 15:58:43 by obelaizi         ###   ########.fr        #
+#    Updated: 2023/01/16 23:31:39 by obelaizi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 all : $(NAME)
 

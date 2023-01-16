@@ -114,15 +114,41 @@ void	sort_ez(t_stack **a, t_stack **b)
 	}
 }
 
+void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int count)
+{
+	while ((*top_a)->index >= count)
+	{
+		if (ft_lstsize((*top_a)) - scan_last((*top_a), count) + 1 > scan_first((*top_a), count) - 1)
+			ra(top_a);
+		else
+			rra(top_a);
+	}
+	if ((*top_a)->index >= count - (chunk / 2))
+		pb(top_a, top_b);
+	else
+	{
+		pb(top_a, top_b);
+		if ((*top_a) && (*top_a)->index >= count)
+		{
+			if (ft_lstsize((*top_a)) - scan_last((*top_a), count) + 1 > scan_first((*top_a), count) - 1)
+				rr(top_a, top_b);
+			else
+			{
+				rra(top_a);
+				rb(top_b);
+			}
+		}
+		else
+			rb(top_b);
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	*top_a;
 	t_stack	*top_b;
-	int		count;
 	int		total;
 	int		chunk;
-	int		first;
-	int		last;
 
 	top_a = NULL;
 	top_b = NULL;
@@ -130,13 +156,13 @@ int	main(int argc, char *argv[])
 		return(printf("cmon do something") ,0);
 	while (--argc)
 		if (main_parse(*(++argv), &top_a))
-			return (printf("error ;)") ,0);
+			return (printf("error ;)"), ft_lstclear(&top_a), 0);
 	if (check_duplicate(top_a))
-		return (printf("there is duplicate baby xD"), 0);
+		return (printf("there is duplicate baby xD"), ft_lstclear(&top_a), 0);
 	set_index(top_a, ft_lstsize(top_a));
 	total = ft_lstsize(top_a);
 	if (total <= 5)
-		return (sort_ez(&top_a, &top_b), 0);
+		return (sort_ez(&top_a, &top_b), ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
 	else if (total <= 20)
 		chunk = total;
 	else if (total <= 200)
@@ -145,58 +171,28 @@ int	main(int argc, char *argv[])
 		chunk = total / 10;
 	 else
 		chunk = total / 15;
-	count = chunk;
+	total = chunk;
 	while (top_a)
 	{
-		
-		if (!top_a || is_sorted(top_a))
-			break ;
-		if (ft_lstsize(top_b) == count)
-			count = count + chunk;
-		while (top_a->index >= count)
-		{
-			first = scan_first(top_a, count) - 1;
-			last = scan_last(top_a, count) - 1;
-			if (ft_lstsize(top_a) - last > first)
-				ra(&top_a);
-			else
-				rra(&top_a);
-		}
-		if (top_a->index >= count - (chunk / 2))
-			pb(&top_a, &top_b);
-		else
-		{
-			pb(&top_a, &top_b);
-			if (top_a && top_a->index >= count)
-			{
-				first = scan_first(top_a, count) - 1;
-				last = scan_last(top_a, count) - 1;
-				if (ft_lstsize(top_a) - last > first)
-					rr(&top_a, &top_b);
-				else
-				{
-					rra(&top_a);
-					rb(&top_b);
-				}
-			}
-			else
-				rb(&top_b);
-		}
+		if (ft_lstsize(top_b) == total)
+			total = total + chunk;
+		fill_b(&top_a, &top_b, chunk, total);
 	}
-	count = total - 1;
+	total--;
 	while (top_b)
 	{
-		if (top_b->index == count)
+		if (top_b->index == total)
 		{
 			pa(&top_a, &top_b);
-			count--;
+			total--;
 		}
 		else
 		{
-			if (get_pos(top_b, count) > (chunk / 2) - 1)
+			if (get_pos(top_b, total) > (chunk / 2))
 				rrb(&top_b);
 			else
 				rb(&top_b);
 		}
 	}
+	return (ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
 }

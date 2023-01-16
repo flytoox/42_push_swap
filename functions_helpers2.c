@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:48:50 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/16 15:52:56 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:17:56 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	get_pos(t_stack *head, int index)
 {
 	int	count;
 
-	count = 0;
+	count = 1;
 	while (head)
 	{
 		if (head->index == index)
