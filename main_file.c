@@ -114,34 +114,6 @@ void	sort_ez(t_stack **a, t_stack **b)
 	}
 }
 
-void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int count)
-{
-	while ((*top_a)->index >= count)
-	{
-		if (ft_lstsize((*top_a)) - scan_last((*top_a), count) + 1 > scan_first((*top_a), count) - 1)
-			ra(top_a);
-		else
-			rra(top_a);
-	}
-	if ((*top_a)->index >= count - (chunk / 2))
-		pb(top_a, top_b);
-	else
-	{
-		pb(top_a, top_b);
-		if ((*top_a) && (*top_a)->index >= count)
-		{
-			if (ft_lstsize((*top_a)) - scan_last((*top_a), count) + 1 > scan_first((*top_a), count) - 1)
-				rr(top_a, top_b);
-			else
-			{
-				rra(top_a);
-				rb(top_b);
-			}
-		}
-		else
-			rb(top_b);
-	}
-}
 
 int	main(int argc, char *argv[])
 {
@@ -153,12 +125,12 @@ int	main(int argc, char *argv[])
 	top_a = NULL;
 	top_b = NULL;
 	if (argc == 1)
-		return(printf("cmon do something") ,0);
+		return (0);
 	while (--argc)
 		if (main_parse(*(++argv), &top_a))
-			return (printf("error ;)"), ft_lstclear(&top_a), 0);
+			return (ft_putstr("Error\n", 2), ft_lstclear(&top_a), 0);
 	if (check_duplicate(top_a))
-		return (printf("there is duplicate baby xD"), ft_lstclear(&top_a), 0);
+		return (ft_putstr("Error\n", 2), ft_lstclear(&top_a), 0);
 	set_index(top_a, ft_lstsize(top_a));
 	total = ft_lstsize(top_a);
 	if (total <= 5)

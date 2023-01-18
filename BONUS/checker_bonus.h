@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "./GET_NEXT_LINE/get_next_line.h"
 
 typedef struct t_stack
 {
@@ -32,8 +33,7 @@ int	scan_first(t_stack *head, int chunk);
 int	get_pos(t_stack *head, int index);
 int	get_min(t_stack *head, int check);
 
-int	ft_isdigit(int c);
-size_t	ft_strlen(char *s);
+int		ft_isdigit(int c);
 void	free_str(char **str, int i);
 void	ft_putstr(const char *s, int fd);
 
