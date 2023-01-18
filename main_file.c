@@ -41,38 +41,55 @@ void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int count)
 	}
 }
 
-
-void	print_lst(t_stack *head)
+void	fill_a(t_stack **top_a, t_stack **top_b, int chunk, int count, int check)
 {
-	while (head)
+	while (*top_b)
 	{
-		printf("%d|%d| ", head->data, head->index);
-		head = head->next;
+		if ((*top_b)->index == count - 1)
+		{
+			pa(top_a, top_b);
+			check = 1;
+		}
+		if ((*top_b)->index == count)
+		{
+			pa(top_a, top_b);
+			if (check)
+			{
+				sa(top_a);
+				count -= 2;
+				check = 0;
+			}
+			else
+				count--;
+		}
+		else
+			if (get_pos(*top_b, count) > (chunk / 2))
+				rrb(top_b);
+			else
+				rb(top_b);
 	}
 }
 
-int	main(int argc, char *argv[])
+int	handle_me_pls(int argc, char *argv[], t_stack **top_a)
 {
-	t_stack	*top_a;
-	t_stack	*top_b;
-	int		total;
-	int		chunk;
-	int		count;
-
-	top_a = NULL;
-	top_b = NULL;
 	if (argc == 1)
 		return (0);
 	while (--argc)
-		if (main_parse(*(++argv), &top_a))
-			return (ft_putstr("Error\n", 2), ft_lstclear(&top_a), 0);
-	if (check_duplicate(top_a))
-		return (ft_putstr("Error\n", 2), ft_lstclear(&top_a), 0);
-	set_index(top_a, ft_lstsize(top_a));
-	total = ft_lstsize(top_a);
-	if (total <= 5)
-		return (sort_ez(&top_a, &top_b), ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
-	else if (total <= 20)
+		if (main_parse(*(++argv), top_a))
+			return (ft_putstr("Error\n", 2), ft_lstclear(top_a), 0);
+	if (check_duplicate(*top_a))
+		return (ft_putstr("Error\n", 2), ft_lstclear(top_a), 0);
+	if (is_sorted(*top_a))
+		return (ft_lstclear(top_a), 0);
+	set_index(*top_a, ft_lstsize(*top_a));
+	return (1);
+}
+
+int	give_me_that_chunck(int total)
+{
+	int	chunk;
+
+	if (total <= 20)
 		chunk = total;
 	else if (total <= 200)
 		chunk = total / 5;
@@ -80,6 +97,23 @@ int	main(int argc, char *argv[])
 		chunk = total / 10;
 	 else
 		chunk = total / 15;
+	return (chunk);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_stack	*top_a;
+	t_stack	*top_b;
+	int		chunk;
+	int		count;
+
+	top_a = NULL;
+	top_b = NULL;
+	if (!handle_me_pls(argc, argv, &top_a))
+		return (0);
+	if (ft_lstsize(top_a) <= 5)
+		return (sort_ez(&top_a, &top_b), ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
+	chunk = give_me_that_chunck(ft_lstsize(top_a));
 	count = chunk;
 	while (top_a)
 	{
@@ -87,21 +121,6 @@ int	main(int argc, char *argv[])
 			count = count + chunk;
 		fill_b(&top_a, &top_b, chunk, count);
 	}
-	count = total - 1;
-	while (top_b)
-	{
-		if (top_b->index == count)
-		{
-			pa(&top_a, &top_b);
-			count--;
-		}
-		else
-		{
-			if (get_pos(top_b, count) > (chunk / 2))
-				rrb(&top_b);
-			else
-				rb(&top_b);
-		}
-	}
+	fill_a(&top_a, &top_b, chunk, ft_lstsize(top_b) - 1, 0);
 	return (ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
 }
