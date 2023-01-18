@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:48:02 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/18 14:39:22 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/18 22:14:11 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ void	sort_3(t_stack **a, int start_index)
 		else
 			sa(a);
 	}
-	else if ((*a)->index == start_index + 2 && (*a)->next->index == start_index + 1 && (*a)->next->next->index == start_index)
+	else if ((*a)->index == start_index + 2 && (*a)->next->index
+		== start_index + 1 && (*a)->next->next->index == start_index)
 	{
 		sa(a);
 		rra(a);
 	}
-	else if ((*a)->index == start_index && (*a)->next->index == start_index + 2 && (*a)->next->next->index == start_index + 1)
+	else if ((*a)->index == start_index && (*a)->next->index
+		== start_index + 2 && (*a)->next->next->index == start_index + 1)
 	{
 		sa(a);
 		ra(a);
@@ -89,7 +91,7 @@ void	sort_4(t_stack **a, t_stack **b, int start_index)
 
 void	sort_ez(t_stack **a, t_stack **b)
 {
-	int pos;
+	int	pos;
 
 	if (is_sorted(*a))
 		return ;

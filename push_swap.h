@@ -24,43 +24,43 @@ typedef struct t_stack
 	struct t_stack	*next;
 }		t_stack;
 
-int		main_parse(char *s, t_stack **head);
-int		check_duplicate(t_stack *a);
-int		is_sorted(t_stack *head);
-int		scan_last(t_stack *head, int chunk);
-int		scan_first(t_stack *head, int chunk);
-int		get_pos(t_stack *head, int index);
-int		get_min(t_stack *head, int check);
-void	set_index(t_stack *head, int size_lst);
-void	sort_ez(t_stack **a, t_stack **b);
+void			fill_b(t_stack **top_a, t_stack **top_b, int chunk, int cnt);
+void			fill_a(t_stack **top_a, t_stack **top_b, int chunk, int count);
 
-int	ft_isdigit(int c);
-size_t	ft_strlen(const char *s);
-void	free_str(char **str, int i);
-void	ft_putstr(const char *s, int fd);
+int				main_parse(char *s, t_stack **head);
+int				check_duplicate(t_stack *a);
+int				is_sorted(t_stack *head);
+int				scan_last(t_stack *head, int chunk);
+int				scan_first(t_stack *head, int chunk);
+int				get_pos(t_stack *head, int index);
+int				get_min(t_stack *head, int check);
+void			set_index(t_stack *head, int size_lst);
+void			sort_ez(t_stack **a, t_stack **b);
 
-char	**ft_split(char const *s, char c);
+int				ft_isdigit(int c);
+size_t			ft_strlen(const char *s);
+void			free_str(char **str, int i);
+void			ft_putstr(const char *s, int fd);
+
 long long int	ft_atoi(const char *str);
+char			**ft_split(char const *s, char c);
 
-t_stack	*ft_stack_new(int content, int index);
-void	add_stack_back(t_stack **lst, t_stack *new);
-void	add_stack_front(t_stack **lst, t_stack *new);
-int	ft_lstsize(t_stack *lst);
-void	ft_lstclear(t_stack **lst);
+t_stack			*ft_stack_new(int content, int index);
+void			add_stack_back(t_stack **lst, t_stack *new);
+void			add_stack_front(t_stack **lst, t_stack *new);
+int				ft_lstsize(t_stack *lst);
+void			ft_lstclear(t_stack **lst);
 
-
-void	sa(t_stack **a);
-void	sb(t_stack **b);
-void	ss(t_stack **a, t_stack **b);
-void	pa(t_stack **a, t_stack **b);
-void	pb(t_stack **a, t_stack **b);
-void	ra(t_stack **a);
-void	rb(t_stack **b);
-void	rr(t_stack **a, t_stack **b);
-void	rra(t_stack **a);
-void	rrb(t_stack **b);
-void	rrr(t_stack **a, t_stack **b);
-
-
+void			sa(t_stack **a);
+void			sb(t_stack **b);
+void			ss(t_stack **a, t_stack **b);
+void			pa(t_stack **a, t_stack **b);
+void			pb(t_stack **a, t_stack **b);
+void			ra(t_stack **a);
+void			rb(t_stack **b);
+void			rr(t_stack **a, t_stack **b);
+void			rra(t_stack **a);
+void			rrb(t_stack **b);
+void			rrr(t_stack **a, t_stack **b);
 
 #endif

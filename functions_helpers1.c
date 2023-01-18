@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:50:44 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/16 15:48:45 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/18 21:53:01 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ long long int	ft_atoi(const char *str)
 			return (999999999999);
 		result = result * 10 +(*str - 48);
 		str++;
-	} 
+	}
 	return (result * sign);
 }
 
@@ -70,7 +70,7 @@ static int	check_n(t_stack *head, int n)
 	while (head)
 	{
 		if (n == head->data)
-			count++;	
+			count++;
 		head = head->next;
 	}
 	return (count);
@@ -79,12 +79,12 @@ static int	check_n(t_stack *head, int n)
 int	check_duplicate(t_stack *a)
 {
 	t_stack	*node;
-	
+
 	node = a;
 	while (node)
 	{
 		if (check_n(a, node->data))
-			return(1);
+			return (1);
 		node = node->next;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:42:14 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/18 14:43:47 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/18 21:59:16 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ size_t	ft_strlen(const char *s)
 
 int	check_num(char *s)
 {
-	int len;
+	int	len;
 	int	i;
 
 	len = ft_strlen(s);
 	i = -1;
 	while (++i < len)
 	{
-		if ((s[i] == '+' || s[i] == '-') && (s[i + 1] == '+' || s[i + 1] == '-'))
+		if ((s[i] == '+' || s[i] == '-')
+			&& (s[i + 1] == '+' || s[i + 1] == '-'))
 			return (0);
 		if (!(ft_isdigit(s[i])) && s[i] != '+' && s[i] != '-' && s[i] != ' ')
 			return (0);

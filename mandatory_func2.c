@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:40:42 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/16 15:42:08 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/18 21:56:40 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	rr(t_stack **a, t_stack **b)
 	printf("rr\n");
 }
 
-void rra(t_stack **a)
+void	rra(t_stack **a)
 {
 	t_stack	*node;
 	t_stack	*tmp;
@@ -81,14 +81,9 @@ void rra(t_stack **a)
 		return ;
 	node = *a;
 	while (node->next->next != NULL)
-	{
 		node = node->next;
-	}
-
 	tmp = node->next;
-
 	node->next = NULL;
-
 	tmp->next = *a;
 	*a = tmp;
 	printf("rra\n");

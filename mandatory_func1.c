@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:40:47 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/16 15:41:20 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/18 22:11:16 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	pa(t_stack **a, t_stack **b)
 	*b = (*b)->next;
 	free(tmp);
 	printf("pa\n");
-
 }
 
 void	pb(t_stack **a, t_stack **b)

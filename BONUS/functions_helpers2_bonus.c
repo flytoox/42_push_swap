@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:48:50 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/17 23:33:08 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/18 22:06:16 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static int	is_last(t_stack *head, int chunk)
 int	scan_last(t_stack *head, int chunk)
 {
 	int	count;
-	
+
 	count = 0;
-	while(is_last(head, chunk))
+	while (is_last(head, chunk))
 	{
 		head = head->next;
 		count++;
@@ -39,9 +39,9 @@ int	scan_last(t_stack *head, int chunk)
 int	scan_first(t_stack *head, int chunk)
 {
 	int	count;
-	
+
 	count = 1;
-	while(head)
+	while (head)
 	{
 		if (head->index < chunk)
 			return (count);
@@ -73,7 +73,7 @@ int	get_min(t_stack *head, int check)
 	tmp = head->data;
 	while (head && tmp <= check)
 	{
-		tmp = head->data; 
+		tmp = head->data;
 		head = head->next;
 	}
 	while (head)

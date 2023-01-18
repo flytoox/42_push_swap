@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:41:06 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/18 13:03:44 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/18 22:09:40 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	ft_strcmp(char *s1, const char *s2)
 	return (-1);
 }
 
-int contain_nl(char *str)
+int	contain_nl(char *str)
 {
 	if (!str)
 		return (0);
 	if (str[0] == '\n')
-			return (1);
+		return (1);
 	return (0);
 }
 
@@ -63,7 +63,19 @@ int	check_func(char *str, t_stack **a, t_stack **b)
 		return (ft_putstr("Error\n", 2), 0);
 }
 
-int main(int argc, char **argv)
+int	handle_me_pls(int argc, char *argv[], t_stack **top_a)
+{
+	if (argc == 1)
+		return (0);
+	while (--argc)
+		if (main_parse(*(++argv), top_a))
+			return (ft_putstr("Error\n", 2), ft_lstclear(top_a), 0);
+	if (check_duplicate(*top_a))
+		return (ft_putstr("Error\n", 2), ft_lstclear(top_a), 0);
+	return (1);
+}
+
+int	main(int argc, char **argv)
 {
 	t_stack	*top_a;
 	t_stack	*top_b;
@@ -71,13 +83,8 @@ int main(int argc, char **argv)
 
 	top_a = NULL;
 	top_b = NULL;
-	if (argc == 1)
-		return(0);
-	while (--argc)
-		if (main_parse(*(++argv), &top_a))
-			return (ft_putstr("Error\n", 2), ft_lstclear(&top_a), 0);
-	if (check_duplicate(top_a))
-		return (ft_putstr("Error\n", 2), ft_lstclear(&top_a), 0);
+	if (!handle_me_pls(argc, argv, &top_a))
+		return (0);
 	bf = get_next_line(0);
 	while (bf)
 	{
@@ -87,8 +94,8 @@ int main(int argc, char **argv)
 		bf = get_next_line(0);
 	}
 	if (is_sorted(top_a) && !top_b)
-		return (ft_putstr("OK\n", 1), free(bf), ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
-	else
-		return (ft_putstr("KO\n", 1), free(bf), ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
-	return (0);
+		return (ft_putstr("OK\n", 1), free(bf),
+			ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
+	return (ft_putstr("KO\n", 1), free(bf),
+		ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
 }

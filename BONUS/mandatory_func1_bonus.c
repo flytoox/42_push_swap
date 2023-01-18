@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:40:47 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/18 12:03:05 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/18 22:09:08 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	pa(t_stack **a, t_stack **b)
 	add_stack_front(a, ft_stack_new(tmp->data, tmp->index));
 	*b = (*b)->next;
 	free(tmp);
-
 }
 
 void	pb(t_stack **a, t_stack **b)
