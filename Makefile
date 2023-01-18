@@ -6,7 +6,7 @@
 #    By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/15 19:52:17 by obelaizi          #+#    #+#              #
-#    Updated: 2023/01/18 12:54:32 by obelaizi         ###   ########.fr        #
+#    Updated: 2023/01/18 14:44:14 by obelaizi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ OBJS_BONUS= $(SRCS_BONUS:.c=.o)
 	cc -c $(FLAGS) $< -o $@
 	
 $(NAME): $(OBJS)
-	make -C ft_printf
 	cc $(OBJS) -o $(NAME)
 
 bonus: $(OBJS_BONUS)
