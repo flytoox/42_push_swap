@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:41:06 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/18 22:09:40 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/19 21:44:55 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int argc, char **argv)
 	top_a = NULL;
 	top_b = NULL;
 	if (!handle_me_pls(argc, argv, &top_a))
-		return (0);
+		return (1);
 	bf = get_next_line(0);
 	while (bf)
 	{

@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:42:14 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/18 21:59:16 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/19 21:42:25 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main_parse(char *s, t_stack **head)
 	char	**res;
 	int		i;
 
-	if (!check_num(s))
+	if (!check_num(s) || !(*s))
 		return (1);
 	res = ft_split(s, ' ');
 	i = -1;

@@ -52,7 +52,7 @@ int	main(int argc, char *argv[])
 	top_a = NULL;
 	top_b = NULL;
 	if (!handle_me_pls(argc, argv, &top_a))
-		return (0);
+		return (1);
 	if (ft_lstsize(top_a) <= 5)
 		return (sort_ez(&top_a, &top_b),
 			ft_lstclear(&top_a), ft_lstclear(&top_b), 0);

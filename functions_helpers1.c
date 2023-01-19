@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:50:44 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/18 21:53:01 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/19 21:43:05 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ long long int	ft_atoi(const char *str)
 			sign *= -1;
 		str++;
 	}
+	if (!(*str))
+		return (999999999999);
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
