@@ -6,7 +6,7 @@
 #    By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/15 19:52:17 by obelaizi          #+#    #+#              #
-#    Updated: 2023/01/19 21:48:24 by obelaizi         ###   ########.fr        #
+#    Updated: 2023/01/20 11:37:00 by obelaizi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,10 @@ $(NAME): $(OBJS)
 bonus: $(OBJS_BONUS)
 	cc $(OBJS_BONUS) -o $(NAME_BONUS)
 
-clean: clean_bonus
+clean: 
 	rm -f $(OBJS) $(OBJS_BONUS) 
 
-fclean:clean clean_bonus
+fclean:clean
 	rm -f $(NAME) $(NAME_BONUS)
 
 re: fclean all
