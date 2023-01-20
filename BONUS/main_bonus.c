@@ -6,7 +6,7 @@
 /*   By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:41:06 by obelaizi          #+#    #+#             */
-/*   Updated: 2023/01/19 21:44:55 by obelaizi         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:04:21 by obelaizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int argc, char **argv)
 	while (bf)
 	{
 		if (!check_func(bf, &top_a, &top_b))
-			return (free(bf), ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
+			return (free(bf), ft_lstclear(&top_a), ft_lstclear(&top_b), 1);
 		free(bf);
 		bf = get_next_line(0);
 	}
