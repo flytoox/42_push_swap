@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+         #
+#    By: obelaizi <obelaizi@student.42.fr>          +#+  +:+       +#+         #c
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/15 19:52:17 by obelaizi          #+#    #+#              #
 #    Updated: 2023/01/20 20:14:52 by obelaizi         ###   ########.fr        #

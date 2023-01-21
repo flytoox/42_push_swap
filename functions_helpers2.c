@@ -28,7 +28,7 @@ int	scan_last(t_stack *head, int chunk)
 	int	count;
 
 	count = 0;
-	while (is_last(head, chunk))
+	while (is_last(head->next, chunk))
 	{
 		head = head->next;
 		count++;
@@ -40,7 +40,7 @@ int	scan_first(t_stack *head, int chunk)
 {
 	int	count;
 
-	count = 1;
+	count = 0;
 	while (head)
 	{
 		if (head->index < chunk)

@@ -12,80 +12,12 @@
 
 #include "checker_bonus.h"
 
-static int	is_last(t_stack *head, int chunk)
+void	ft_putstr(const char *s, int fd)
 {
-	while (head)
+	if (!s)
 	{
-		if (head->index < chunk)
-			return (1);
-		head = head->next;
+		write(fd, "(null)", 6);
+		return ;
 	}
-	return (0);
-}
-
-int	scan_last(t_stack *head, int chunk)
-{
-	int	count;
-
-	count = 0;
-	while (is_last(head, chunk))
-	{
-		head = head->next;
-		count++;
-	}
-	return (count);
-}
-
-int	scan_first(t_stack *head, int chunk)
-{
-	int	count;
-
-	count = 1;
-	while (head)
-	{
-		if (head->index < chunk)
-			return (count);
-		head = head->next;
-		count++;
-	}
-	return (count);
-}
-
-int	get_pos(t_stack *head, int index)
-{
-	int	count;
-
-	count = 1;
-	while (head)
-	{
-		if (head->index == index)
-			return (count);
-		head = head->next;
-		count++;
-	}
-	return (0);
-}
-
-int	get_min(t_stack *head, int check)
-{
-	int		tmp;
-
-	tmp = head->data;
-	while (head && tmp <= check)
-	{
-		tmp = head->data;
-		head = head->next;
-	}
-	while (head)
-	{
-		if (head->data <= check)
-		{
-			head = head->next;
-			continue ;
-		}
-		if (head->data < tmp)
-			tmp = head->data;
-		head = head->next;
-	}
-	return (tmp);
+	write(fd, s, ft_strlen(s));
 }

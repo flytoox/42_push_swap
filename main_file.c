@@ -36,12 +36,21 @@ int	give_me_that_chunck(int total)
 	else if (total <= 200)
 		chunk = total / 5;
 	else if (total <= 500)
-		chunk = total / 9;
+		chunk = total / 10;
 	else
 		chunk = total / 15;
 	return (chunk);
 }
 
+// void	print_lst(t_stack *head)
+// {
+// 	int i = 1;
+// 	while (head)
+// 	{
+// 		printf("%d |%d|", head->data, i++);
+// 		head = head->next;
+// 	}
+// }
 int	main(int argc, char *argv[])
 {
 	t_stack	*top_a;

@@ -28,10 +28,6 @@ typedef struct t_stack
 int				main_parse(char *s, t_stack **head);
 int				check_duplicate(t_stack *a);
 int				is_sorted(t_stack *head);
-int				scan_last(t_stack *head, int chunk);
-int				scan_first(t_stack *head, int chunk);
-int				get_pos(t_stack *head, int index);
-int				get_min(t_stack *head, int check);
 
 int				ft_isdigit(int c);
 void			free_str(char **str, int i);

@@ -12,13 +12,13 @@
 
 #include "push_swap.h"
 
-void	fill_b_helper(t_stack **top_a, t_stack **top_b, int *cnt)
+void	fill_b_helper(t_stack **top_a, t_stack **top_b, int cnt)
 {
 	pb(top_a, top_b);
-	if (*top_a && (*top_a)->index >= *cnt)
+	if (*top_a && (*top_a)->index >= cnt)
 	{
-		if (ft_lstsize(*top_a) - scan_last(*top_a, *cnt)
-			+ 1 >= scan_first(*top_a, *cnt) - 1)
+		if (ft_lstsize(*top_a) - scan_last(*top_a, cnt)
+			>= scan_first(*top_a, cnt))
 			rr(top_a, top_b);
 		else
 		{
@@ -35,15 +35,15 @@ void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int cnt)
 	while ((*top_a)->index >= cnt)
 	{
 		if (ft_lstsize(*top_a) - scan_last(*top_a, cnt)
-			+ 1 >= scan_first(*top_a, cnt) - 1)
+			>= scan_first(*top_a, cnt))
 			ra(top_a);
 		else
 			rra(top_a);
 	}
-	if ((*top_a)->index > cnt - (chunk / 2))
+	if ((*top_a)->index >= cnt - (chunk / 2))
 		pb(top_a, top_b);
 	else
-		fill_b_helper(top_a, top_b, &cnt);
+		fill_b_helper(top_a, top_b, cnt);
 }
 
 void	fill_a_helper(t_stack **top_a, t_stack **top_b, int *check, int *count)
