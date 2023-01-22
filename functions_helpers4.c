@@ -17,8 +17,7 @@ void	fill_b_helper(t_stack **top_a, t_stack **top_b, int cnt)
 	pb(top_a, top_b);
 	if (*top_a && (*top_a)->index >= cnt)
 	{
-		if (ft_lstsize(*top_a) - scan_last(*top_a, cnt)
-			>= scan_first(*top_a, cnt))
+		if (ft_lstsize(*top_a) - scan_last(*top_a, cnt) >= scan_first(*top_a, cnt))
 			rr(top_a, top_b);
 		else
 		{
@@ -34,8 +33,7 @@ void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int cnt)
 {
 	while ((*top_a)->index >= cnt)
 	{
-		if (ft_lstsize(*top_a) - scan_last(*top_a, cnt)
-			>= scan_first(*top_a, cnt))
+		if (ft_lstsize(*top_a) - scan_last(*top_a, cnt) >= scan_first(*top_a, cnt))
 			ra(top_a);
 		else
 			rra(top_a);
@@ -66,16 +64,18 @@ void	fill_a(t_stack **top_a, t_stack **top_b, int chunk, int count)
 	check = 0;
 	while (*top_b)
 	{
+		// if (ft_lstsize(*top_a) == chunk * 2)
+		// 	chunk = 500 / 10;
 		if ((*top_b)->index == count - 1)
 		{
 			pa(top_a, top_b);
 			check = 1;
 		}
-		if ((*top_b)->index == count)
+		else if ((*top_b)->index == count)
 			fill_a_helper(top_a, top_b, &check, &count);
 		else
 		{
-			if (get_pos(*top_b, count) > (chunk / 2))
+			if (get_pos(*top_b, count) > (ft_lstsize(*top_b) / 2))
 				rrb(top_b);
 			else
 				rb(top_b);

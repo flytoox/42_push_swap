@@ -12,7 +12,7 @@
 
 NAME = push_swap
 NAME_BONUS = checker
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -g
 
 
 SRCS = $(wildcard *.c)
