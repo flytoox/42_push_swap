@@ -25,7 +25,8 @@ typedef struct t_stack
 }		t_stack;
 
 void			fill_b(t_stack **top_a, t_stack **top_b, int chunk, int cnt);
-void			fill_a(t_stack **top_a, t_stack **top_b, int chunk, int count);
+void			fill_a(t_stack **top_a, t_stack **top_b, int count);
+int				give_me_instr(t_stack *head, int index);
 
 int				main_parse(char *s, t_stack **head);
 int				check_duplicate(t_stack *a);

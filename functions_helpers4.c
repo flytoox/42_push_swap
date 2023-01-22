@@ -17,7 +17,8 @@ void	fill_b_helper(t_stack **top_a, t_stack **top_b, int cnt)
 	pb(top_a, top_b);
 	if (*top_a && (*top_a)->index >= cnt)
 	{
-		if (ft_lstsize(*top_a) - scan_last(*top_a, cnt) >= scan_first(*top_a, cnt))
+		if (ft_lstsize(*top_a) - scan_last(*top_a, cnt)
+			>= scan_first(*top_a, cnt))
 			rr(top_a, top_b);
 		else
 		{
@@ -33,7 +34,8 @@ void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int cnt)
 {
 	while ((*top_a)->index >= cnt)
 	{
-		if (ft_lstsize(*top_a) - scan_last(*top_a, cnt) >= scan_first(*top_a, cnt))
+		if (ft_lstsize(*top_a) - scan_last(*top_a, cnt)
+			>= scan_first(*top_a, cnt))
 			ra(top_a);
 		else
 			rra(top_a);
@@ -44,7 +46,7 @@ void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int cnt)
 		fill_b_helper(top_a, top_b, cnt);
 }
 
-void	fill_a_helper(t_stack **top_a, t_stack **top_b, int *check, int *count)
+void	fill_a_helper1(t_stack **top_a, t_stack **top_b, int *check, int *count)
 {
 	pa(top_a, top_b);
 	if (*check)
@@ -57,28 +59,51 @@ void	fill_a_helper(t_stack **top_a, t_stack **top_b, int *check, int *count)
 		*count = *count - 1;
 }
 
-void	fill_a(t_stack **top_a, t_stack **top_b, int chunk, int count)
+void	fill_a_helper2(t_stack **top_b, int count)
+{
+	int	instr_count;
+	int	instr_count1;
+
+	instr_count1 = give_me_instr(*top_b, count - 1);
+	instr_count = give_me_instr(*top_b, count);
+	if (instr_count1 > instr_count)
+	{
+		if (get_pos(*top_b, count) > (ft_lstsize(*top_b) / 2))
+			rrb(top_b);
+		else
+			rb(top_b);
+	}
+	else
+	{
+		if (get_pos(*top_b, count - 1) > (ft_lstsize(*top_b) / 2))
+			rrb(top_b);
+		else
+			rb(top_b);
+	}
+}
+
+void	fill_a(t_stack **top_a, t_stack **top_b, int count)
 {
 	int	check;
 
 	check = 0;
 	while (*top_b)
 	{
-		// if (ft_lstsize(*top_a) == chunk * 2)
-		// 	chunk = 500 / 10;
 		if ((*top_b)->index == count - 1)
 		{
 			pa(top_a, top_b);
 			check = 1;
 		}
 		else if ((*top_b)->index == count)
-			fill_a_helper(top_a, top_b, &check, &count);
-		else
+			fill_a_helper1(top_a, top_b, &check, &count);
+		else if (check)
 		{
 			if (get_pos(*top_b, count) > (ft_lstsize(*top_b) / 2))
 				rrb(top_b);
 			else
 				rb(top_b);
 		}
+		else
+			fill_a_helper2(top_b, count);
 	}
 }

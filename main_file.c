@@ -42,6 +42,13 @@ int	give_me_that_chunck(int total)
 	return (chunk);
 }
 
+int	give_me_instr(t_stack *head, int index)
+{
+	if (get_pos(head, index) > (ft_lstsize(head) / 2))
+		return (ft_lstsize(head) - (get_pos(head, index) - 1));
+	return (get_pos(head, index) - 1);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	*top_a;
@@ -60,14 +67,10 @@ int	main(int argc, char *argv[])
 	count = chunk;
 	while (top_a)
 	{
-		// if (ft_lstsize(top_a) == chunk * 2)
-		// 	chunk = 23;
 		if (ft_lstsize(top_b) == count)
 			count = count + chunk;
 		fill_b(&top_a, &top_b, chunk, count);
 	}
-	// set_index(top_a, 3);
-	// sort_ez(&top_a, &top_b);
-	fill_a(&top_a, &top_b, chunk, ft_lstsize(top_b) - 1);
+	fill_a(&top_a, &top_b, ft_lstsize(top_b) - 1);
 	return (ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
 }
