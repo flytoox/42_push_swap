@@ -26,7 +26,7 @@ void	ra(t_stack **a)
 		node = node->next;
 	node->next = tmp;
 	tmp->next = NULL;
-	printf("ra\n");
+	ft_putstr("ra\n", 1);
 }
 
 void	rb(t_stack **b)
@@ -43,7 +43,7 @@ void	rb(t_stack **b)
 		node = node->next;
 	node->next = tmp;
 	tmp->next = NULL;
-	printf("rb\n");
+	ft_putstr("rb\n", 1);
 }
 
 void	rr(t_stack **a, t_stack **b)
@@ -69,7 +69,7 @@ void	rr(t_stack **a, t_stack **b)
 	tmp->next = NULL;
 	node1->next = tmp1;
 	tmp1->next = NULL;
-	printf("rr\n");
+	ft_putstr("rr\n", 1);
 }
 
 void	rra(t_stack **a)
@@ -86,7 +86,7 @@ void	rra(t_stack **a)
 	node->next = NULL;
 	tmp->next = *a;
 	*a = tmp;
-	printf("rra\n");
+	ft_putstr("rra\n", 1);
 }
 
 void	rrb(t_stack **b)
@@ -103,5 +103,5 @@ void	rrb(t_stack **b)
 	node->next = NULL;
 	tmp->next = *b;
 	*b = tmp;
-	printf("rrb\n");
+	ft_putstr("rrb\n", 1);
 }

@@ -32,7 +32,7 @@ int	give_me_that_chunck(int total)
 	int	chunk;
 
 	if (total <= 20)
-		chunk = total;
+		chunk = total / 2;
 	else if (total <= 200)
 		chunk = total / 5;
 	else if (total <= 500)
@@ -44,9 +44,38 @@ int	give_me_that_chunck(int total)
 
 int	give_me_instr(t_stack *head, int index)
 {
-	if (get_pos(head, index) > (ft_lstsize(head) / 2))
+	if (get_pos(head, index) > (ft_lstsize(head) / 2) + 1)
 		return (ft_lstsize(head) - (get_pos(head, index) - 1));
 	return (get_pos(head, index) - 1);
+}
+
+void	display_stack(t_stack *stack_a, t_stack *stack_b)
+{
+	t_stack	*tmp1;
+	t_stack	*tmp2;
+
+	tmp1 = stack_a;
+	tmp2 = stack_b;
+	while (tmp1 || tmp2)
+	{
+		if (tmp2 && tmp1)
+		{
+			printf("|%d|%d\t|%d|%d\n", tmp1->index, tmp1->data,
+				tmp2->index, tmp2->data);
+			tmp2 = tmp2->next;
+			tmp1 = tmp1->next;
+		}
+		else if (tmp1)
+		{
+			printf("|%d|%d\n", tmp1->index, tmp1->data);
+			tmp1 = tmp1->next;
+		}
+		else if (tmp2)
+		{
+			printf("\t|%d|%d\n", tmp2->index, tmp2->data);
+			tmp2 = tmp2->next;
+		}
+	}
 }
 
 int	main(int argc, char *argv[])

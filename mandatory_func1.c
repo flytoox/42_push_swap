@@ -22,7 +22,7 @@ void	sa(t_stack **a)
 	*a = (*a)->next;
 	node->next = node->next->next;
 	(*a)->next = node;
-	printf("sa\n");
+	ft_putstr("sa\n", 1);
 }
 
 void	sb(t_stack **b)
@@ -35,7 +35,7 @@ void	sb(t_stack **b)
 	*b = (*b)->next;
 	node->next = node->next->next;
 	(*b)->next = node;
-	printf("sb\n");
+	ft_putstr("sb\n", 1);
 }
 
 void	ss(t_stack **a, t_stack **b)
@@ -52,7 +52,7 @@ void	ss(t_stack **a, t_stack **b)
 	*b = (*b)->next;
 	node->next = node->next->next;
 	(*b)->next = node;
-	printf("ss\n");
+	ft_putstr("ss\n", 1);
 }
 
 void	pa(t_stack **a, t_stack **b)
@@ -65,7 +65,7 @@ void	pa(t_stack **a, t_stack **b)
 	add_stack_front(a, ft_stack_new(tmp->data, tmp->index));
 	*b = (*b)->next;
 	free(tmp);
-	printf("pa\n");
+	ft_putstr("pa\n", 1);
 }
 
 void	pb(t_stack **a, t_stack **b)
@@ -78,5 +78,5 @@ void	pb(t_stack **a, t_stack **b)
 	add_stack_front(b, ft_stack_new(tmp->data, tmp->index));
 	*a = (*a)->next;
 	free(tmp);
-	printf("pb\n");
+	ft_putstr("pb\n", 1);
 }

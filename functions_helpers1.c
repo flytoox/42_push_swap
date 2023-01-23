@@ -33,7 +33,7 @@ void	rrr(t_stack **a, t_stack **b)
 	node->next = NULL;
 	tmp->next = *a;
 	*a = tmp;
-	printf("rrr\n");
+	ft_putstr("rrr\n", 2);
 }
 
 long long int	ft_atoi(const char *str)

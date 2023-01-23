@@ -26,14 +26,18 @@ static int	is_last(t_stack *head, int chunk)
 int	scan_last(t_stack *head, int chunk)
 {
 	int	count;
+	int	total;
 
 	count = 0;
-	while (is_last(head->next, chunk))
+	total = ft_lstsize(head);
+	while (head && is_last(head->next, chunk))
 	{
 		head = head->next;
 		count++;
 	}
-	return (count);
+	if (!count)
+		return (0);
+	return (total - count);
 }
 
 int	scan_first(t_stack *head, int chunk)
