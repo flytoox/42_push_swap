@@ -27,18 +27,19 @@ int	handle_me_pls(int argc, char *argv[], t_stack **top_a)
 	return (1);
 }
 
-int	give_me_that_chunck(int total)
+int	give_me_that_chunck(t_stack *top_a, int *total)
 {
 	int	chunk;
 
-	if (total <= 20)
-		chunk = total / 2;
-	else if (total <= 200)
-		chunk = total / 5;
-	else if (total <= 500)
-		chunk = total / 8;
+	*total = ft_lstsize(top_a);
+	if (*total <= 20)
+		chunk = *total / 2;
+	else if (*total <= 200)
+		chunk = *total / 5;
+	else if (*total <= 500)
+		chunk = *total / 8;
 	else
-		chunk = total / 15;
+		chunk = *total / 15;
 	return (chunk);
 }
 
@@ -49,41 +50,13 @@ int	give_me_instr(t_stack *head, int index)
 	return (get_pos(head, index) - 1);
 }
 
-void	display_stack(t_stack *stack_a, t_stack *stack_b)
-{
-	t_stack	*tmp1;
-	t_stack	*tmp2;
-
-	tmp1 = stack_a;
-	tmp2 = stack_b;
-	while (tmp1 || tmp2)
-	{
-		if (tmp2 && tmp1)
-		{
-			printf("|%d|%d\t|%d|%d\n", tmp1->index, tmp1->data,
-				tmp2->index, tmp2->data);
-			tmp2 = tmp2->next;
-			tmp1 = tmp1->next;
-		}
-		else if (tmp1)
-		{
-			printf("|%d|%d\n", tmp1->index, tmp1->data);
-			tmp1 = tmp1->next;
-		}
-		else if (tmp2)
-		{
-			printf("\t|%d|%d\n", tmp2->index, tmp2->data);
-			tmp2 = tmp2->next;
-		}
-	}
-}
-
 int	main(int argc, char *argv[])
 {
 	t_stack	*top_a;
 	t_stack	*top_b;
 	int		chunk;
 	int		count;
+	int		total;
 
 	top_a = NULL;
 	top_b = NULL;
@@ -92,12 +65,14 @@ int	main(int argc, char *argv[])
 	if (ft_lstsize(top_a) <= 5)
 		return (sort_ez(&top_a, &top_b),
 			ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
-	chunk = give_me_that_chunck(ft_lstsize(top_a));
+	chunk = give_me_that_chunck(top_a, &total);
 	count = chunk;
 	while (top_a)
 	{
 		if (ft_lstsize(top_b) == count)
 			count = count + chunk;
+		if (count > total)
+			count = total;
 		fill_b(&top_a, &top_b, chunk, count);
 	}
 	fill_a(&top_a, &top_b, ft_lstsize(top_b) - 1);

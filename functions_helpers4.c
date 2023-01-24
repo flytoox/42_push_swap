@@ -15,18 +15,8 @@
 void	fill_b_helper(t_stack **top_a, t_stack **top_b, int cnt)
 {
 	pb(top_a, top_b);
-	if (!scan_last(*top_a, cnt))
-		rb(top_b);
-	else if (*top_a && (*top_a)->index >= cnt)
-	{
-		if (scan_last(*top_a, cnt) >= scan_first(*top_a, cnt))
-			rr(top_a, top_b);
-		else
-		{
-			rra(top_a);
-			rb(top_b);
-		}
-	}
+	if (*top_a && (*top_a)->index >= cnt)
+		rr(top_a, top_b);
 	else
 		rb(top_b);
 }
@@ -34,82 +24,57 @@ void	fill_b_helper(t_stack **top_a, t_stack **top_b, int cnt)
 void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int cnt)
 {
 	while ((*top_a)->index >= cnt)
-	{
-		if (scan_last(*top_a, cnt)
-			>= scan_first(*top_a, cnt))
-			ra(top_a);
-		else
-			rra(top_a);
-	}
-	if ((*top_a)->index <= cnt - (chunk / 2))
+		ra(top_a);
+	if ((*top_a)->index < cnt - (chunk / 2))
 		pb(top_a, top_b);
 	else
 		fill_b_helper(top_a, top_b, cnt);
 }
 
-void	fill_a_helper1(t_stack **top_a, t_stack **top_b, int *check, int *count)
+void	push_cnt(t_stack **a, t_stack **b, int count)
 {
-	if ((*top_b)->index == *count - 1)
+	while ((*b)->index != count)
 	{
-		*check = 1;
-		pa(top_a, top_b);
+		if (get_pos(*b, count) > (ft_lstsize(*b) / 2) + 1)
+			rrb(b);
+		else
+			rb(b);
 	}
-	else
-	{
-		pa(top_a, top_b);
-		*count = *count - 1;
-	}
+	pa(a, b);
 }
 
-void	fill_a_helper2(t_stack **top_a, t_stack **top_b, int *count, int *check)
+void	push_cnt1(t_stack **a, t_stack **b, int count)
 {
-	int	instr_count;
-	int	instr_count1;
-
-	instr_count1 = give_me_instr(*top_b, *count - 1);
-	instr_count = give_me_instr(*top_b, *count);
-	while ((*top_b)->index != *count && (*top_b)->index != *count - 1)
+	while ((*b)->index != count - 1)
 	{
-		if (instr_count1 >= instr_count)
-		{
-			if (get_pos(*top_b, *count) > (ft_lstsize(*top_b) / 2) + 1)
-				rrb(top_b);
-			else
-				rb(top_b);
-		}
+		if (get_pos(*b, count - 1) > (ft_lstsize(*b) / 2) + 1)
+			rrb(b);
 		else
-		{
-			if (get_pos(*top_b, *count - 1) > (ft_lstsize(*top_b) / 2) + 1)
-				rrb(top_b);
-			else
-				rb(top_b);
-		}
+			rb(b);
 	}
-	fill_a_helper1(top_a, top_b, check, count);
+	pa(a, b);
+	push_cnt(a, b, count);
+	sa(a);
 }
 
 void	fill_a(t_stack **top_a, t_stack **top_b, int count)
 {
-	int	check;
+	int	instr_count;
+	int	instr_count1;
 
-	check = 0;
 	while (*top_b)
 	{
-		if (!check)
-			fill_a_helper2(top_a, top_b, &count, &check);
+		instr_count1 = give_me_instr(*top_b, count - 1);
+		instr_count = give_me_instr(*top_b, count);
+		if (instr_count1 >= instr_count || instr_count1 == -1)
+		{
+			push_cnt(top_a, top_b, count);
+			count -= 1;
+		}
 		else
 		{
-			while ((*top_b)->index != count)
-			{
-				if (get_pos(*top_b, count) > (ft_lstsize(*top_b) / 2) + 1)
-					rrb(top_b);
-				else
-					rb(top_b);
-			}
-			pa(top_a, top_b);
-			sa(top_a);
+			push_cnt1(top_a, top_b, count);
 			count -= 2;
-			check = 0;
 		}
 	}
 }
