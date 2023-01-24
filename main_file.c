@@ -21,8 +21,6 @@ int	handle_me_pls(int argc, char *argv[], t_stack **top_a)
 			return (ft_putstr("Error\n", 2), ft_lstclear(top_a), 0);
 	if (check_duplicate(*top_a))
 		return (ft_putstr("Error\n", 2), ft_lstclear(top_a), 0);
-	if (is_sorted(*top_a))
-		return (ft_lstclear(top_a), 0);
 	set_index(*top_a, ft_lstsize(*top_a));
 	return (1);
 }
@@ -62,6 +60,8 @@ int	main(int argc, char *argv[])
 	top_b = NULL;
 	if (!handle_me_pls(argc, argv, &top_a))
 		return (1);
+	if (is_sorted(top_a))
+		return (ft_lstclear(&top_a), 0);
 	if (ft_lstsize(top_a) <= 5)
 		return (sort_ez(&top_a, &top_b),
 			ft_lstclear(&top_a), ft_lstclear(&top_b), 0);
@@ -69,11 +69,9 @@ int	main(int argc, char *argv[])
 	count = chunk;
 	while (top_a)
 	{
-		if (ft_lstsize(top_b) == count)
-			count = count + chunk;
 		if (count > total)
 			count = total;
-		fill_b(&top_a, &top_b, chunk, count);
+		fill_b(&top_a, &top_b, chunk, &count);
 	}
 	fill_a(&top_a, &top_b, ft_lstsize(top_b) - 1);
 	return (ft_lstclear(&top_a), ft_lstclear(&top_b), 0);

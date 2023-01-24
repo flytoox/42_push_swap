@@ -21,14 +21,16 @@ void	fill_b_helper(t_stack **top_a, t_stack **top_b, int cnt)
 		rb(top_b);
 }
 
-void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int cnt)
+void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int *cnt)
 {
-	while ((*top_a)->index >= cnt)
+	while ((*top_a)->index >= *cnt)
 		ra(top_a);
-	if ((*top_a)->index < cnt - (chunk / 2))
+	if ((*top_a)->index < *cnt - (chunk / 2))
 		pb(top_a, top_b);
 	else
-		fill_b_helper(top_a, top_b, cnt);
+		fill_b_helper(top_a, top_b, *cnt);
+	if (ft_lstsize(*top_b) == *cnt)
+		*cnt = *cnt + chunk;
 }
 
 void	push_cnt(t_stack **a, t_stack **b, int count)

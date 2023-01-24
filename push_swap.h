@@ -24,7 +24,7 @@ typedef struct t_stack
 	struct t_stack	*next;
 }		t_stack;
 
-void			fill_b(t_stack **top_a, t_stack **top_b, int chunk, int cnt);
+void			fill_b(t_stack **top_a, t_stack **top_b, int chunk, int *cnt);
 void			fill_a(t_stack **top_a, t_stack **top_b, int count);
 int				give_me_instr(t_stack *head, int index);
 
