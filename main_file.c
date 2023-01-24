@@ -36,7 +36,7 @@ int	give_me_that_chunck(int total)
 	else if (total <= 200)
 		chunk = total / 5;
 	else if (total <= 500)
-		chunk = total / 9;
+		chunk = total / 8;
 	else
 		chunk = total / 15;
 	return (chunk);

@@ -15,7 +15,9 @@
 void	fill_b_helper(t_stack **top_a, t_stack **top_b, int cnt)
 {
 	pb(top_a, top_b);
-	if (*top_a && (*top_a)->index >= cnt)
+	if (!scan_last(*top_a, cnt))
+		rb(top_b);
+	else if (*top_a && (*top_a)->index >= cnt)
 	{
 		if (scan_last(*top_a, cnt) >= scan_first(*top_a, cnt))
 			rr(top_a, top_b);
@@ -39,7 +41,7 @@ void	fill_b(t_stack **top_a, t_stack **top_b, int chunk, int cnt)
 		else
 			rra(top_a);
 	}
-	if ((*top_a)->index < cnt - (chunk / 2))
+	if ((*top_a)->index <= cnt - (chunk / 2))
 		pb(top_a, top_b);
 	else
 		fill_b_helper(top_a, top_b, cnt);
