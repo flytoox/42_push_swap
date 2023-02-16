@@ -82,12 +82,7 @@ int	get_min(t_stack *head, int check)
 	}
 	while (head)
 	{
-		if (head->data <= check)
-		{
-			head = head->next;
-			continue ;
-		}
-		if (head->data < tmp)
+		if (head->data > check && head->data < tmp)
 			tmp = head->data;
 		head = head->next;
 	}
